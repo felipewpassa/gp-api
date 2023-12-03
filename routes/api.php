@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\V1\CategoryController as V1CategoryController;
 use App\Http\Controllers\Api\V1\ProductController as V1ProductController;
+use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,8 +17,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::prefix('v1')->group(function () {
-    Route::apiResources([
-        'categories' => V1CategoryController::class,
-        'products' => V1ProductController::class,
-    ]);
+    Route::middleware('auth:sanctum')->group(function () {
+        Route::apiResource('categories', V1CategoryController::class);
+        Route::apiResource('products', V1ProductController::class);
+    });
+    Route::post('/login', [AuthController::class, 'login']);
 });
