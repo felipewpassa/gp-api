@@ -60,6 +60,19 @@ class ProductController extends Controller
     }
 
 
+    public function show(string $id)
+    {
+
+        $product = Product::find($id);
+
+        if (empty($product)) {
+            return $this->error('Produto não encontrado', 404);
+        }
+
+        return $this->response('', 200, $product->load('category'));
+    }
+
+
     public function update(Request $request, string $id)
     {
 
