@@ -16,7 +16,7 @@ class AuthController extends Controller
 
         if (Auth::attempt($request->only('email', 'password'))) {
             return $this->response('Usuario logado com sucesso', 200, [
-                'token' => $request->user()->createToken('teste')->plainTextToken
+                'token' => $request->user()->createToken('api')->plainTextToken
             ]);
         }
 
