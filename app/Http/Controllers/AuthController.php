@@ -22,4 +22,12 @@ class AuthController extends Controller
 
         return $this->error('Credenciais inválidas', 401);
     }
+
+
+    public function logout(Request $request)
+    {
+        $request->user()->currentAccessToken()->delete();
+
+        return $this->response('Logout com sucesso', 200);
+    }
 }
