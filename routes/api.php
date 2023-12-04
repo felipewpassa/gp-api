@@ -21,6 +21,7 @@ Route::prefix('v1')->group(function () {
         Route::apiResource('categories', V1CategoryController::class);
         Route::apiResource('products', V1ProductController::class);
         Route::post('/logout', [AuthController::class, 'logout']);
+        Route::get('/login/verify', [AuthController::class, 'verify']);
     });
     Route::post('/login', [AuthController::class, 'login']);
 });
