@@ -35,9 +35,15 @@ class ProductController extends Controller
             $productModel->where('description', 'like', "%$description%");
         }
 
+        $perPage = 5;
+        $currentPage = (int) $request->get('page');
+        $productModel = $productModel->forPage($currentPage, $perPage);
+        $totalRegisters = Product::count();
+        $totalPages = ceil($totalRegisters / $perPage);
+
         $productsCollection = $productModel->get();
 
-        return $this->response('', 200, $productsCollection);
+        return $this->response('', 200, $productsCollection, $totalPages);
     }
 
 

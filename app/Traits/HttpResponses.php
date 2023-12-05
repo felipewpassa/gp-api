@@ -8,13 +8,20 @@ use Illuminate\Database\Eloquent\Model;
 
 trait HttpResponses
 {
-    public function response($message, string|int $status, array|Model|Collection $data = [])
-    {
-        return response()->json([
+    public function response(
+        $message,
+        string|int $status,
+        array|Model|Collection $data = [],
+        int $totalPages = 0
+    ) {
+        $response = [
+            'totalPages' =>  $totalPages,
             'message' => $message,
             'status' => $status,
             'data' => $data
-        ], $status);
+        ];
+
+        return response()->json($response, $status);
     }
 
     public function error($message, string|int $status, array|MessageBag $errors = [], array $data = [])
