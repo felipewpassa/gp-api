@@ -49,6 +49,18 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
+        $imageSalvedName = '';
+
+        $image = $request->file('file');
+        if(!empty($image)) {
+            $pathSalved = $image->storeAs('public/products', time() . '.' . $image->getClientOriginalExtension());
+            $pathSalvedArr = explode('/', $pathSalved);
+            if (!empty($pathSalvedArr[2])) {
+                $imageSalvedName = $pathSalvedArr[2];
+            }
+        }
+
+        $request->merge(['image' => $imageSalvedName]);
 
         $validator = $validator = self::getValidator($request->all());
 
