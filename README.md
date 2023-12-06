@@ -39,3 +39,6 @@ E por fim, para executar o ambiente de desenvolvimento execute:
 ```bash
 php artisan serve
 ```
+## Libs Externas
+- Laravel-pt-br-location para traduzir mensagens do validador do laravel, para entrega de forma amigável para o usuário
+
